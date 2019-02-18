@@ -11,9 +11,22 @@
 - `队列.py`队列
 #### crawler
     爬虫
-###### maoyan
+###### maoyan.py
     下载猫眼电影Top100信息
 - `maoyan.py`下载猫眼电影Top100信息
+###### Get_QQ_Photo.py
+    下载qq相册的图片
+- `Get_QQ_Photo.py`下载qq相册的图片
+###### lol.py
+    爬取lol英雄皮肤
+- `lol.py`爬取lol英雄皮肤
+###### novel.py
+    下载https://www.shukeba.com网址的小说及其相关信息
+- `novel.py`爬取不同分类下的小说，包含小说文章，图片，标题，作者，简介
+###### yande.py
+    下载https://yande.re的图片
+- `yande.py`下载https://yande.re的图片,需要翻墙或者设置外网代理
+
 #### game
     游戏
 ###### globule
