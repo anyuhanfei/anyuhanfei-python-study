@@ -9,6 +9,11 @@
 - `快速排序.py`快速排序
 - `简化桶排序.py`简化桶排序
 - `队列.py`队列
+###### Imooc-Algorithm-PythonEdition-master
+- `generate_random_list.py`生成随机列表类
+- `插入排序_insertion_sort.py`
+- `选择排序_selection_sort.py`
+
 #### crawler
     爬虫
 ###### maoyan.py
