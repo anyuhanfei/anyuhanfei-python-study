@@ -6,6 +6,7 @@
 
 from generate_random_list import GenerateRandomList
 
+
 def merge_sort(disorder_list):
     '''
         计算数组元素个数，并按照当前顺序分成左右两组，然后继续将已分离的数组分成左右两组，直到每个分离的数组都只有一个元素(或0个元素)

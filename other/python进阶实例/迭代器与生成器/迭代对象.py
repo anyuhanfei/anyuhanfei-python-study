@@ -13,6 +13,7 @@
 import requests
 from collections import Iterable, Iterator
 
+
 class WeatherIterator(Iterator):
     ''' 实现一个迭代器对象Weatherlterator，next方法每次返回一个城市气温 '''
     def __init__(self, cities):
@@ -25,25 +26,26 @@ class WeatherIterator(Iterator):
         r = requests.get(u'http://wthrcdn.etouch.cn/weater_mini?city=' + city)
         data = r.json()['data']['forecast'][0]
         return '%s: %s, %s' % (city, data['low'], data['high'])
-    
+
     def next(self):
-        if self.index = len(self.cities):
+        if self.index == len(self.cities):
             raise StopIteration
         city = self.cities[self.index]
         self.index += 1
         return self.getWeather(city)
+
 
 class WeatherIterable(Iterable):
     ''' 实现一个可迭代对象Weatherlterable，__iter__方法返回一个迭代器对象 '''
     def __init__(self, cities):
         ''' 所有需要查询城市的字典'''
         self.cities = cities
-    
+
     def __iter__(self):
         ''' 返回一个迭代器对象 '''
         return WeatherIterator(self.cities)
 
-if __name__ == '__main__' :
-    for x in WeatherIterable([u'北京', u'上海', u'广州', u'郑州']):
-        print(x) # 返回的就是四个城市的气温信息。
 
+if __name__ == '__main__':
+    for x in WeatherIterable([u'北京', u'上海', u'广州', u'郑州']):
+        print(x)  # 返回的就是四个城市的气温信息。

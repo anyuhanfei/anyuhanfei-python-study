@@ -12,13 +12,14 @@ bug
 from aip import AipOcr
 import configparser
 
+
 class BaiDuAPI():
     ''' 图片文字识别 '''
     file_path = 'password.ini'
     image_path = 'Picture.png'
 
-    def __init__(self, file_path = None):
-        if file_path != None:
+    def __init__(self, file_path=None):
+        if file_path is not None:
             self.file_path = file_path
         # target = configparser.ConfigParser()
         # target.read('gbk',self.file_path)
@@ -30,9 +31,9 @@ class BaiDuAPI():
         secret_key = 'QbiwCEs0Yfv3FmU8cVfWAVSpvPqp1fRM'
         self.client = AipOcr(app_id, api_key, secret_key)
 
-    def pictureText(self,image_path = None):
+    def pictureText(self, image_path=None):
         ''' 读取图片中的图片 '''
-        if image_path != None:
+        if image_path is not None:
             self.image_path = image_path
         images = self.gerPicture()
         texts = self.client.basicGeneral(images)

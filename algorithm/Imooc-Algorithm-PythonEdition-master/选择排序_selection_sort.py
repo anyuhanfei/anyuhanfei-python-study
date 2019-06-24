@@ -6,6 +6,7 @@
 
 from generate_random_list import GenerateRandomList
 
+
 def selection_sort(disorder_list):
     """
         选择排序
@@ -22,6 +23,7 @@ def selection_sort(disorder_list):
                 min_number = j
         disorder_list[i], disorder_list[min_number] = disorder_list[min_number], disorder_list[i]
     return disorder_list
+
 
 if __name__ == "__main__":
     grl = GenerateRandomList()

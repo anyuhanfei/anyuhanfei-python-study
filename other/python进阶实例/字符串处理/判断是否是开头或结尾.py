@@ -1,6 +1,6 @@
 '''
     字符串a是否以字符串b开头或结尾
-''' 
+'''
 '''
     某文件系统目录下有一系列文件，需要对后缀为某些的加上可执行权限。
     处理这个问题就要判断后缀是否是符合。
@@ -15,11 +15,11 @@ start_condition = ('c', 'b')
 end_condition = ('.sh', '.py')
 
 print('判断结尾:')
-for fl in file_name_list :
-    if fl.endswith(end_condition) :
+for fl in file_name_list:
+    if fl.endswith(end_condition):
         print(fl)
-    
+
 print('判断开头:')
-for fl in file_name_list :
-    if fl.startswith(start_condition) :
+for fl in file_name_list:
+    if fl.startswith(start_condition):
         print(fl)

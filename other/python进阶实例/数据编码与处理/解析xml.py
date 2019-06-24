@@ -23,4 +23,3 @@ f = open('demo.xml')
 et = parse(f)
 print(et)
 # 因无法导入包，放弃
-

@@ -2,9 +2,10 @@
     快速排序
 '''
 import time
-from generate_random_list import GenerateRandomList
 import sys
 import random
+
+import generate_random_list
 
 
 sys.setrecursionlimit(2000000)
@@ -31,7 +32,7 @@ def quick_sort(init_list, left_key, right_key):
 
 
 if __name__ == "__main__":
-    grl = GenerateRandomList()
+    grl = generate_random_list.GenerateRandomList()
     init_list = grl.integer_list(100000, 0, 100000)
     init_list = grl.generate_nearly_ordered_list(1000000, 20)
     start_time = time.time()

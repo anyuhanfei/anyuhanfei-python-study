@@ -7,6 +7,7 @@
 from generate_random_list import GenerateRandomList
 import math
 
+
 def shell_sort(disorder_list):
     '''
         以列表元素数除以二为增量分组（以后已增量分组除以二为新的增量分组）；
@@ -16,16 +17,17 @@ def shell_sort(disorder_list):
     '''
     list_count = len(disorder_list)
     shell = math.floor(list_count/2)
-    while shell > 0 :
+    while shell > 0:
         i = shell
-        while i < list_count :
+        while i < list_count:
             j = i - shell
-            while j >=0 and disorder_list[j] > disorder_list[j+shell] :
+            while j >= 0 and disorder_list[j] > disorder_list[j+shell]:
                 disorder_list[j], disorder_list[j+shell] = disorder_list[j+shell], disorder_list[j]
                 j -= shell
             i += 1
         shell = math.floor(shell/2)
     return disorder_list
+
 
 if __name__ == "__main__":
     grl = GenerateRandomList()

@@ -6,6 +6,7 @@
 
 from generate_random_list import GenerateRandomList
 
+
 def insertion_sort_one(disorder_list):
     """
         逆向思维解析
@@ -27,6 +28,7 @@ def insertion_sort_one(disorder_list):
             else:
                 break
     return disorder_list
+
 
 def insertion_sort_one_optimize(disorder_list):
     """
@@ -71,6 +73,7 @@ def insertion_sort_two(disorder_list):
             j = j-1
     return disorder_list
 
+
 def insertion_sort_two_optimize(disorder_list):
     """
         insertion_sort_two()方法的优化版
@@ -88,6 +91,7 @@ def insertion_sort_two_optimize(disorder_list):
             j = j-1
         disorder_list[j] = i_value
     return disorder_list
+
 
 if __name__ == "__main__":
     grl = GenerateRandomList()

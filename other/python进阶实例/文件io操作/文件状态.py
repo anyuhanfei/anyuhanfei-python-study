@@ -19,4 +19,3 @@ s.st_mode & stat.S_IRUSR  # 读权限对比，大于0则有权限
 
 # 三个时间在st_atime,st_mtime,st_ctime参数中
 # 文件大小在st_size中
-

@@ -18,8 +18,8 @@ while True:
         picture = open('%d.jpg' % (counter), 'wb')
         print('正在下载第%d张图片...' % (counter))
         try:
-            picture.write(opener.open(pattern_page.findall(opener.open(i).read().decode('utf-8'))[0]).read())       
-        except:
+            picture.write(opener.open(pattern_page.findall(opener.open(i).read().decode('utf-8'))[0]).read())
+        except BaseException:
             print('第%d张图片下载失败!' % (counter))
         picture.close()
         counter += 1

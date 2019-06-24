@@ -5,8 +5,8 @@
 import json
 
 # python数据类型转换称json
-l = [1, 2, '3', {'name': 'bob'}]
-l_json = json.dumps(l, separators=[',', ':'])
+list = [1, 2, '3', {'name': 'bob'}]
+l_json = json.dumps(list, separators=[',', ':'])
 print(l_json)
 # json转换为python数据类型
 print(json.loads(l_json))

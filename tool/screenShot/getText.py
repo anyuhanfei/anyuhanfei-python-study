@@ -10,6 +10,7 @@ import win32con
 
 import win32clipboard
 
+
 class GetText:
     ''' 把图像识别出的文字保存到剪切板 '''
 
@@ -20,14 +21,15 @@ class GetText:
         d = win32clipboard.GetClipboardData(win32con.CF_UNICODETEXT)
         win32clipboard.CloseClipboard()
         return d
-    
+
     @classmethod
     def setText(cls, aString):
         ''' 设置剪切板中的内容，这里把已经获取到的图片中的文字保存在剪切板中 '''
         win32clipboard.OpenClipboard()
         win32clipboard.EmptyClipboard()
         win32clipboard.SetClipboardData(win32con.CF_UNICODETEXT, aString)
-                        
+
+
 if __name__ == "__main__":
     GetText.setText('666')
     GetText.getText()

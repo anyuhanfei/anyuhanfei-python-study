@@ -23,7 +23,7 @@ class MyAES:
         self.key = self.check_key(key).encode()
         self.iv = Random.new().read(AES.block_size)
         self.mode = AES.MODE_CFB
-    
+
     def check_key(self, key):
         '''
             检查key长度是否符合aes要求;
@@ -33,7 +33,7 @@ class MyAES:
             return key
         else:
             raise Exception('key的长度不符合要求!')
-    
+
     def encrypt(self, data):
         '''
             加密
@@ -42,8 +42,8 @@ class MyAES:
         '''
         cipher = AES.new(self.key, self.mode, self.iv)
         return cipher.encrypt(data.encode())
-    
-    def decrypt(self, data, is_decode = False):
+
+    def decrypt(self, data, is_decode=False):
         '''
             解密
             使用初始化参数生成一个aes对象，用来解密；
@@ -51,7 +51,8 @@ class MyAES:
         '''
         cipher = AES.new(self.key, self.mode, self.iv)
         res = cipher.decrypt(data)
-        return res if is_decode == False else res.decode()
+        return res if is_decode is False else res.decode()
+
 
 if __name__ == "__main__":
     aes = MyAES("asdfghjkqwertyui")
@@ -59,4 +60,3 @@ if __name__ == "__main__":
     print(b2a_hex(res_en))
     res_de = aes.decrypt(res_en, True)
     print(res_de)
-
