@@ -2,7 +2,7 @@ import time
 import random
 
 
-def quick_sort_two_way(init_list, left_key, right_key):
+def quick_sort_two_ways(init_list, left_key, right_key):
     '''二路快速排序
     当分支元素个数小于16个时使用插入排序；
     待排序数组仅有少量乱序元素的问题，要随机获取基准值，并将基准值与第一个元素值交换；
@@ -18,28 +18,61 @@ def quick_sort_two_way(init_list, left_key, right_key):
     return:
         None
     '''
-    if left_key < right_key:
-        if right_key - left_key <= 16:
-            assist_insertion_sort(init_list, left_key, right_key)
+    if right_key - left_key <= 16:
+        assist_insertion_sort(init_list, left_key, right_key)
+        return
+    base_key = random.randint(left_key, right_key)
+    init_list[left_key], init_list[base_key] = init_list[base_key], init_list[left_key]
+    base_value = init_list[left_key]
+    left_sentry = left_key + 1
+    right_sentry = right_key
+    while True:
+        while left_sentry <= right_sentry and init_list[left_sentry] < base_value:
+            left_sentry += 1
+        while right_sentry >= left_sentry and init_list[right_sentry] > base_value:
+            right_sentry -= 1
+        if left_sentry > right_sentry:
+            break
+        init_list[right_sentry], init_list[left_sentry] = init_list[left_sentry], init_list[right_sentry]
+        right_sentry -= 1
+        left_sentry += 1
+    init_list[left_key], init_list[right_sentry] = init_list[right_sentry], init_list[left_key]
+    quick_sort_two_ways(init_list, left_key, right_sentry - 1)
+    quick_sort_two_ways(init_list, right_sentry + 1, right_key)
+
+
+def quick_sort_three_ways(init_list, left_key, right_key):
+    '''三路快速排序
+    和一路快速排序类似，但是多了一个对等于基准数的判断；
+    定义一个一直向右的走下标（最左+1），定义一个左下标（最左），定义一个右下标（最右+1）；
+    判断走下标的值，如果大于基准值，与右下标-1的值进行交换，然后右下标-1，走下标不动（因为交换到了一个为检测的值）；
+    如果小于基准值，与左下标+1的值进行交换，然后左下标+1，走下标+1；
+    如果等于基准值，则走下标+1；
+    基准值与左下标交换位置；
+    待排序左范围是（最左，左下标-1），右范围是（右下标，最右）
+    '''
+    if right_key - left_key <= 16:
+        assist_insertion_sort(init_list, left_key, right_key)
+        return
+    base_key = random.randint(left_key, right_key)
+    init_list[left_key], init_list[base_key] = init_list[base_key], init_list[left_key]
+    base_value = init_list[left_key]
+    left_pile = left_key
+    sentry = left_key + 1
+    right_pile = right_key + 1
+    while sentry < right_pile:
+        if init_list[sentry] > base_value:
+            init_list[right_pile - 1], init_list[sentry] = init_list[sentry], init_list[right_pile - 1]
+            right_pile -= 1
+        elif init_list[sentry] < base_value:
+            init_list[left_pile + 1], init_list[sentry] = init_list[sentry], init_list[left_pile + 1]
+            left_pile += 1
+            sentry += 1
         else:
-            base_key = random.randint(left_key, right_key)
-            init_list[left_key], init_list[base_key] = init_list[base_key], init_list[left_key]
-            base_value = init_list[left_key]
-            left_sentry = left_key + 1
-            right_sentry = right_key
-            while True:
-                while left_sentry <= right_sentry and init_list[left_sentry] < base_value:
-                    left_sentry += 1
-                while right_sentry >= left_sentry and init_list[right_sentry] > base_value:
-                    right_sentry -= 1
-                if left_sentry > right_sentry:
-                    break
-                init_list[right_sentry], init_list[left_sentry] = init_list[left_sentry], init_list[right_sentry]
-                right_sentry -= 1
-                left_sentry += 1
-            init_list[left_key], init_list[right_sentry] = init_list[right_sentry], init_list[left_key]
-            quick_sort_two_way(init_list, left_key, right_sentry - 1)
-            quick_sort_two_way(init_list, right_sentry + 1, right_key)
+            sentry += 1
+    init_list[left_key], init_list[left_pile] = init_list[left_pile], init_list[left_key]
+    quick_sort_three_ways(init_list, left_key, left_pile - 1)
+    quick_sort_three_ways(init_list, right_pile, right_key)
 
 
 def assist_insertion_sort(init_list, left_key, right_key):
@@ -53,10 +86,10 @@ def assist_insertion_sort(init_list, left_key, right_key):
 
 
 if __name__ == "__main__":
-    max = 10000
+    max = 100
     init_list = [random.randint(0, 10) for x in range(max)]
     start_time = time.time()
-    quick_sort_two_way(init_list, 0, len(init_list)-1)
-    # print(init_list)
+    quick_sort_three_ways(init_list, 0, len(init_list)-1)
+    print(init_list)
     end_time = time.time()
     print('执行时间:%s' % (end_time - start_time))
