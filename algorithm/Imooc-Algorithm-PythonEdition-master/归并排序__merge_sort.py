@@ -3,6 +3,7 @@
 
 将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为二路归并。
 '''
+import time
 
 from generate_random_list import GenerateRandomList
 
@@ -18,7 +19,7 @@ def merge_sort(disorder_list):
     list_count = len(disorder_list)
     if list_count == 1:
         return disorder_list
-    middle = list_count/2
+    middle = int(list_count/2)
     left_list = merge_sort(disorder_list[0: middle])
     right_list = merge_sort(disorder_list[middle:])
     i, j, k = 0, 0, 0
@@ -37,7 +38,7 @@ def merge_sort(disorder_list):
         i += 1
         k += 1
     while j < right_list_count:
-        disorder_list[k] = right_list[i]
+        disorder_list[k] = right_list[j]
         j += 1
         k += 1
     return disorder_list
@@ -45,5 +46,10 @@ def merge_sort(disorder_list):
 
 if __name__ == "__main__":
     grl = GenerateRandomList()
-    disorder_list_one = grl.integer_list(10, 0, 100)
-    print(merge_sort(disorder_list_one))
+    disorder_list_one = grl.integer_list(1000000, 0, 100)
+    start_time = time.time()
+    print('起始时间：%s' % start_time)
+    merge_sort(disorder_list_one)
+    end_time = time.time()
+    print('结束时间：%s' % end_time)
+    print('执行时间:%s' % (end_time - start_time))
