@@ -86,10 +86,10 @@ def assist_insertion_sort(init_list, left_key, right_key):
 
 
 if __name__ == "__main__":
-    max = 100
-    init_list = [random.randint(0, 10) for x in range(max)]
+    max = 1000000
+    init_list = [random.randint(0, 100) for x in range(max)]
     start_time = time.time()
     quick_sort_three_ways(init_list, 0, len(init_list)-1)
-    print(init_list)
+    # print(init_list)
     end_time = time.time()
     print('执行时间:%s' % (end_time - start_time))
