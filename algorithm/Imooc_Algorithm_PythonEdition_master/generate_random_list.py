@@ -16,10 +16,10 @@ class GenerateRandomList:
                 number:列表中的元素个数
                 lower_limit:随机数的下限
                 upper_limit:随机数的上限
-            
+
             Return:
                 一个拥有随机整数元素的列表
-            
+
             Raises:
                 没有判断参数的类型，如果不是整数则报错;
                 没有判断lower_limit参数小于upper_limit;
@@ -52,4 +52,3 @@ if __name__ == "__main__":
     test = GenerateRandomList()
     print(test.integer_list(10, 0, 10))
     print(test.generate_nearly_ordered_list(10,10))
-    

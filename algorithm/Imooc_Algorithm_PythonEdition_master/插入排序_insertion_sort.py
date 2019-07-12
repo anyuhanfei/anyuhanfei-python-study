@@ -3,8 +3,8 @@
 
     当前元素与前一个元素比较，如果比前一个元素小则双方交换位置，然后在与前一个元素比较，直到此元素比前一个元素大或者已经在最前位置。
 """
-
 from generate_random_list import GenerateRandomList
+import execution_time
 
 def insertion_sort_one(disorder_list):
     """
@@ -50,7 +50,6 @@ def insertion_sort_one_optimize(disorder_list):
                 break
         disorder_list[i_place] = i_value
     return disorder_list
-
 
 def insertion_sort_two(disorder_list):
     """

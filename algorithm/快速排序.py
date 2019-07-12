@@ -1,6 +1,9 @@
 '''
     快速排序
 '''
+from Imooc_Algorithm_PythonEdition_master import execution_time,generate_random_list
+
+
 def quick_sort(init_list, left_key, right_key):
     if left_key >= right_key: # 如果左大于右，说明已经完成了排序
         return
@@ -20,8 +23,9 @@ def quick_sort(init_list, left_key, right_key):
     quick_sort(init_list, left_key, sentry_left-1) #基准数位置的左部分
     quick_sort(init_list, sentry_right+1, right_key) #基准数位置的右部分
 
-init_list = [4,6,74,3,43,5,8,2,123,5,7,41,6,82]
-init_list = [2,3,4,5,5,6,6,7,8,41,43,74,82,123]
 
-quick_sort(init_list, 0, len(init_list)-1)
-print(init_list)
+grl = generate_random_list.GenerateRandomList()
+init_list = grl.integer_list(1000000, 0, 1000000)
+
+execution_time.def_execution_time(quick_sort, init_list, 0, len(init_list)-1)
+# print(init_list)
