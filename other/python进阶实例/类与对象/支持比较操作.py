@@ -7,13 +7,14 @@
 '''
 from functools import total_ordering
 
+
 @total_ordering
 class Rectangle():
     ''' 矩形类，可以进行实例间的比较 '''
     def __init__(self, w, h):
         self.w = w
         self.h = h
-    
+
     def area(self):
         return self.w * self.h
 
@@ -25,8 +26,9 @@ class Rectangle():
 
     # 由上面的<和==操作符，total_ordering可以推算出<=操作符的计算，故可以省略
 
-if __name__ == '__main__' :
-    r1 = Rectangle(5,3)
-    r2 = Rectangle(4,3)
+
+if __name__ == '__main__':
+    r1 = Rectangle(5, 3)
+    r2 = Rectangle(4, 3)
 
     print(r1 < r2)

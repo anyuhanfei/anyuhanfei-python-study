@@ -21,13 +21,14 @@ from PIL import ImageGrab
 from baiDuApi import BaiDuAPI
 from getText import GetText
 
+
 def screenShot():
     ''' 用于截图并保存 '''
 
     # 等待按下的键盘按键，多个按键用+连接，这里是截图开始
-    if keyboard.wait(hotkey='alt+ctrl+a') == None:
-        #同上，这里是截图开始
-        if keyboard.wait(hotkey='Enter') == None:
+    if keyboard.wait(hotkey='alt+ctrl+a') is None:
+        # 同上，这里是截图开始
+        if keyboard.wait(hotkey='Enter') is None:
             # 因为获取剪切板的图片太快了，所以要停顿一小段时间
             sleep(0.01)
             # 复制剪切板中的图片
@@ -35,25 +36,24 @@ def screenShot():
             sleep(0.01)
             im.save('Picture.png')
 
+
 if __name__ == "__main__":
     # 为了可以多次截图而不是截一次图就结束程序
     baidu_api = BaiDuAPI()
-    
+
     for i in range(sys.maxsize):
         if i == 0:
             print("注意事项：请使用QQ的默认截图按键（Ctrl+alt+a）,截图完成后请敲击回车键完成截图!")
             print("截图完成后，你截取图片中的文字自动复制，您可自由粘贴！")
             print("现在开始截取你需要的图片吧！\n")
-        else :
+        else:
             print("您已成功截图，请截取下一张图！\n")
         screenShot()
-    
+
         res = baidu_api.pictureText()
         print('截取的内容：' + res)
 
         GetText.setText(res)
         sleep(0.01)
         GetText.getText()
-        
-    
-    
+

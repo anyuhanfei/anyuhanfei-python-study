@@ -1,3 +1,5 @@
+from xml.etree.ElemenTree import parser
+
 '''
     解析简单的xml文档
 '''
@@ -16,11 +18,9 @@
 '''
 # 使用标准库中的xml.etree.ElementTree，其中的parse函数可以解析xml
 
-from xml.etree.ElemenTree import parser
 
-f = open('demo.xml')
+file = open('demo.xml')
 
-et = parse(f)
+et = parse(file)
 print(et)
 # 因无法导入包，放弃
-

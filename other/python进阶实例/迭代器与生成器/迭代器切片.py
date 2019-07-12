@@ -10,6 +10,6 @@
 # 使用islice()函数后，可迭代对象的指针在定义的结束行位置
 from itertools import islice
 
-f = open('迭代器切片txt.txt','r')
-for line in islice(f, 10, 20) :
+f = open('迭代器切片txt.txt', 'r')
+for line in islice(f, 10, 20):
     print(line)

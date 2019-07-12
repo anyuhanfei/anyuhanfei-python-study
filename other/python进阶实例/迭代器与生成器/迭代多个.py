@@ -28,7 +28,7 @@ e4 = [randint(60, 100) for _ in range(10)]
 
 count = 0
 
-for s in chain(e1, e2, e3, e4) :
-    if s > 90 :
+for s in chain(e1, e2, e3, e4):
+    if s > 90:
         count += 1
 print(count)

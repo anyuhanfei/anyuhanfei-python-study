@@ -44,7 +44,7 @@ class MaoYan(object):
 if __name__ == '__main__':
     maoyan = MaoYan()
     for offSet in range(10):
-        time.sleep(1) # 程序运行到这个地方要停顿一秒
+        time.sleep(1)  # 程序运行到这个地方要停顿一秒
         url = 'http://maoyan.com/board/4?offset={}'.format(offSet*10)
         html = maoyan.getOnePage(url)
         # 生成器  可迭代

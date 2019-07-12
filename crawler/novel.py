@@ -12,7 +12,7 @@ novel_type = novel_type_dict[novel_type_number]
 # 创建分类文件夹并改变工作目录
 try:
     os.mkdir("./%s" % novel_type)
-except:
+except BaseException:
     pass
 os.chdir("./%s" % novel_type)
 
@@ -25,7 +25,7 @@ while True:
     else:
         url = "https://www.shukeba.com/%s/%s.html" % (novel_type, page_number)
     res = requests.get(url)
-    
+
     if res.status_code != 200:
         error_number += 1
         if error_number > 5:
@@ -33,7 +33,7 @@ while True:
             print('本次下载至%s第%s页' % (novel_type, page_number))
             input('下载失败或已下载至最后一页！')
             break
-        
+
     res.encoding = 'utf-8'
 
     page = etree.HTML(res.text)
@@ -54,7 +54,7 @@ while True:
         txt_url = 'http://downtxt.shukeba.com/main.php?action-downtxt-id-' + b_id
         txt_res = requests.get(txt_url)
         txt_res.encoding = 'utf-8'
-        
+
         try:
             os.mkdir(book_title[index])
         except:

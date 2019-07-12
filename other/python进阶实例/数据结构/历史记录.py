@@ -10,7 +10,7 @@ from collections import deque  # 队列
 N = randint(0, 10)  # 定义一个随机数
 history = deque([], 5)  # 创建一个队列
 
-def guess(k) :
+def guess(k):
     ''' 判断输入数字与随机数的关系 '''
     if k == N:
         print('you win!')
@@ -23,7 +23,7 @@ def guess(k) :
 
 while True:  # 开始游戏
     k = input('请输入一个数字')
-    if k == 'history' or k == 'h' :
+    if k == 'history' or k == 'h':
         print(history)
     else:
         history.append(int(k))  # 把数字加入到队列中，超出5个最先加入的会自动溢出
@@ -40,4 +40,3 @@ from pickle
 pickle.dump(q, open('history','w+'))  # 将数据存储到文件中
 pickle.load(open('history'))  # 读取文件中的数据
 '''
-

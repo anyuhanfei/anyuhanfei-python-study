@@ -5,7 +5,7 @@
 import mmap
 
 f = open('demo.txt', 'r+b')
-#f.fileno()  # 文件描述符
+# f.fileno()  # 文件描述符
 
 m = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_WRITE)  # 写权限
 

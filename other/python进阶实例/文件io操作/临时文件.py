@@ -11,7 +11,7 @@ from tempfile import TemporaryFile, NamedTemporaryFile
 f = TemporaryFile()
 f.write(b'asdf' * 10000)
 f.seek(0)
-for i in range(1,10):
+for i in range(1, 10):
     print(f.read(100))
 
 # TemporaryFile()创建的临时文件不能由文件系统路径找到它，
