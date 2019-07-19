@@ -1,3 +1,6 @@
+import random
+
+
 class IndexMaxHeap:
     '''索引堆'''
     data = []
@@ -36,7 +39,7 @@ class IndexMaxHeap:
         self.data.append(value)
         self.indexes.append(i)
         self.count += 1
-        self.reverse.append(count)
+        self.reverse.append(self.count)
         self._shift_up(self.count)
 
     def extract_max_value(self):
@@ -50,11 +53,12 @@ class IndexMaxHeap:
         if self.count < 1:
             return
         self.indexes[self.count], self.indexes[1] = self.indexes[1], self.indexes[self.count]
-        self.reverse[indexes[1]] = 1
-        self.reverse[indexes[count]] = 0
+        self.reverse[self.indexes[1]] = 1
+        self.reverse[self.indexes[self.count]] = 0
+        pop_index = self.indexes.pop(self.count)
         self.count -= 1
         self._shift_down(1)
-        return self.data.pop(self.indexex.pop(self.count + 1))
+        return self.data[pop_index]
 
     def extract_max_index(self):
         '''删除一个元素，并返回索引值
@@ -63,8 +67,8 @@ class IndexMaxHeap:
         if self.count < 1:
             return
         self.indexes[self.count], self.indexes[1] = self.indexes[1], self.indexes[self.count]
-        self.reverse[indexes[1]] = 1
-        self.reverse[indexes[count]] = 0
+        self.reverse[self.indexes[1]] = 1
+        self.reverse[self.indexes[self.count]] = 0
         self.count -= 1
         self._shift_down(1)
         return self.indexes.pop(self.count + 1)
@@ -94,7 +98,7 @@ class IndexMaxHeap:
 
     def _contain(self, i):
         '''判断i是否有超出堆索引范围'''
-        if i + 1 >= 1 and i + 1 <= count and self.reverse[i+1] != 0:
+        if i + 1 >= 1 and i + 1 <= self.count and self.reverse[i+1] != 0:
             return True
         return False
 
@@ -107,13 +111,13 @@ class IndexMaxHeap:
         while True:
             left_down_k = 2 * k
             temp_k = left_down_k
-            if left_down_k + 1 <= self.count and self.data[indexes[left_down_k]] < self.data[indexes[left_down_k + 1]]:
-                temp_k = left_down_k + 1
-            if temp_k > self.count or self.data[indexes[temp_k]] <= self.data[indexes[k]]:
+            if temp_k + 1 <= self.count and self.data[self.indexes[temp_k]] < self.data[self.indexes[temp_k + 1]]:
+                temp_k += 1
+            if temp_k > self.count or self.data[self.indexes[temp_k]] <= self.data[self.indexes[k]]:
                 break
             self.indexes[temp_k], self.indexes[k] = self.indexes[k], self.indexes[temp_k]
-            self.reverse[indexes[temp_k]] = temp_k
-            self.reverse[indexes[k]] = k
+            self.reverse[self.indexes[temp_k]] = temp_k
+            self.reverse[self.indexes[k]] = k
             k = temp_k
 
     def _shift_up(self, k):
@@ -122,9 +126,44 @@ class IndexMaxHeap:
         交换后，reverse数组更新两者对应的位置；
         '''
         up_k = int(k / 2)
-        while k > 1 and self.data[indexes[up_k]] < self.data[indexes[k]]:
+        while k > 1 and self.data[self.indexes[up_k]] < self.data[self.indexes[k]]:
             self.indexes[up_k], self.indexes[k] = self.indexes[k], self.indexes[up_k]
             self.reverse[self.indexes[up_k]] = up_k
             self.reverse[self.indexes[k]] = k
             k = up_k
             up_k = int(k / 2)
+
+    def show(self):
+        '''简单的堆展示'''
+        print()
+        level = 1
+        i = 1
+        while i <= self.count:
+            print(' ' * int(self.count / level), end="")
+            print(str(self.data[self.indexes[i]]), end="")
+            print(' ' * int(self.count / level), end="")
+            i += 1
+            if level * 2 == i:
+                print()
+                level = level * 2
+
+
+if __name__ == "__main__":
+    max = 10
+    init_list = [random.randint(100, 200) for x in range(max)]
+    imh = IndexMaxHeap()
+    for i in range(0, len(init_list)):
+        imh.insert(i, init_list[i])
+    imh.show()
+    print()
+    print(imh.indexes)
+    print(imh.data)
+    print(imh.reverse)
+    # for o in range(0, len(init_list)):
+    #     print(imh.extract_max_value())
+    imh.change(9, 201)
+    print()
+    print(imh.indexes)
+    print(imh.data)
+    print(imh.reverse)
+    imh.show()
