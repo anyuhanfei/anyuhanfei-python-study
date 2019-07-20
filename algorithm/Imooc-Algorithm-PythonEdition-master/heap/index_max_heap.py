@@ -75,8 +75,7 @@ class IndexMaxHeap:
 
     def get_item(self, i):
         '''获取下标为i的元素值（i是对用户而言）'''
-        if self._contain(i) is False:
-            return False
+        assert self._contain(i)
         return self.data[i + 1]
 
     def change(self, i, new_item):
@@ -88,8 +87,7 @@ class IndexMaxHeap:
             i：对用户而言的下标，以0开始
             new_item：要修改为的元素值
         '''
-        if self._contain(i) is False:
-            return False
+        assert self._contain(i)
         i += 1
         self.data[i] = new_item
         self._shift_down(self.reverse[i])
