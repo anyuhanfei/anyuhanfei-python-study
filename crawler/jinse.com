@@ -30,11 +30,11 @@ import re
 import time
 
 MYSQL = pymysql.connect(
-    host='rm-j6cczhj6xrd54119tdo.mysql.rds.aliyuncs.com',
+    host='127.0.0.1',
     port=3306,
-    user='wanbi',
-    password='eplyQ18IutHCA356',
-    db='wanbi_exchange',
+    user='root',
+    password='root',
+    db='exchange',
     charset='utf8'
 )
 CURSOR = MYSQL.cursor()
