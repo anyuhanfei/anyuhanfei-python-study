@@ -30,11 +30,11 @@ import re
 import time
 
 MYSQL = pymysql.connect(
-    host='127.0.0.1',
+    host='rm-j6cczhj6xrd54119tdo.mysql.rds.aliyuncs.com',
     port=3306,
-    user='root',
-    password='root',
-    db='exchange',
+    user='wanbi',
+    password='eplyQ18IutHCA356',
+    db='wanbi_exchange',
     charset='utf8'
 )
 CURSOR = MYSQL.cursor()
@@ -90,7 +90,10 @@ def get_data():
         if comparison_id(i['id']) is False:
             continue
         # 获取内容
-        content = get_content(i['extra']['topic_url'], headers, cookies)
+        try:
+            content = get_content(i['extra']['topic_url'], headers, cookies)
+        except BaseException:
+            content = ''
         if content == '':
             continue
         # 拼接sql语句
