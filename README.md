@@ -37,6 +37,10 @@
 ###### globule
     接小球游戏，使用pygame库
 - `globule.py`接小球游戏，游戏玩法见文件，练习pygame库
+
+###### 2048
+    2048 小游戏, 使用 pyqt5 库, 仅实现了功能, 无动画效果
+
 #### tool
     工具
 ###### Address2latitude-and-longitude
