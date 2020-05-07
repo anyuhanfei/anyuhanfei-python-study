@@ -3,7 +3,7 @@
 '''
 
 '''数据所在路径及其名称'''
-data_file = "./data.csv"
+DATA_FILE = "./data.csv"
 
 '''游戏回合限时'''
-game_limited_time = 100  # 秒
+GAME_LIMITED_TIME = 100  # 秒
