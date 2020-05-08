@@ -3,17 +3,17 @@
 '''
 import time
 
-from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QApplication
+from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QApplication, QFileDialog
 from PyQt5.QtGui import QFont
 from PyQt5.Qt import Qt
 
 import __init__ as init
-import data
+from data import data
 import api
 
 
 class Window(QWidget):
-    data = data.data  # 成语大全
+    data = data  # 成语大全
     last_idiom = ""  # 上一个成语
     history_idiom = []  # 本局游戏历史
 
@@ -97,6 +97,14 @@ class Window(QWidget):
         time.sleep(0.1)
         self.index()
 
+    def _print(self):
+        '''打印'''
+        save_file_name, other = QFileDialog.getSaveFileName(self, '另存为', './', 'TXT(*.txt)', 'TXT(*.txt)')
+        history_idiom_str = api.history_idiom(self.history_idiom)
+        if save_file_name != '':
+            with open(save_file_name, "w+", encoding="utf-8") as f:
+                f.write(history_idiom_str)
+
     def composer(self):
         '''电脑输入'''
         self.composer_input = QLineEdit(self)
@@ -169,10 +177,11 @@ class Window(QWidget):
         self.reset_btn.setText('重置')
         self.reset_btn.clicked.connect(self._reset)
         # 打印按钮
-        self.reset_btn = QPushButton(self)
-        self.reset_btn.move(610, 60)
-        self.reset_btn.resize(60, 40)
-        self.reset_btn.setText('打印')
+        self.print_btn = QPushButton(self)
+        self.print_btn.move(610, 60)
+        self.print_btn.resize(60, 40)
+        self.print_btn.setText('打印')
+        self.print_btn.clicked.connect(self._print)
         # 空白按钮
         self.blank_btn1 = QPushButton(self)
         self.blank_btn1.move(680, 10)
