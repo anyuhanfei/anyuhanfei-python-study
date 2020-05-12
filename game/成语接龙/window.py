@@ -3,8 +3,9 @@
 '''
 import time
 
-from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QApplication, QFileDialog
+from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QApplication, QFileDialog, QDialog
 from PyQt5.QtGui import QFont
+from PyQt5.QtCore import QTimer
 from PyQt5.Qt import Qt
 
 import __init__ as init
@@ -58,11 +59,15 @@ class Window(QWidget):
     def _player_submit(self):
         '''玩家提交'''
         player_idiom = self.player_input.text()
+        if player_idiom == '':
+            return
         res, msg = api.judge_player_input(self.data, self.last_idiom, player_idiom)
         self.player_input.setText('')
         self.content_label.setText('%s您的输入:%s\n%s\n' % (self.content_label.text(), player_idiom, msg))
         if res is False:
             return
+        # 这是成功了
+        self.countdown.setText('%s' % (init.GAME_LIMITED_TIME))
         self.last_idiom = player_idiom
         self._show_explain(player_idiom)
         self._composer_inputing()
@@ -96,6 +101,11 @@ class Window(QWidget):
         QApplication.processEvents()
         time.sleep(0.1)
         self.index()
+        # 倒计时重开
+        self.countdown.setText('%s' % (init.GAME_LIMITED_TIME))
+        if self.timer.isActive() is False:
+            self.timer.start(1000)
+        self.player_input.setReadOnly(False)
 
     def _print(self):
         '''打印'''
@@ -104,6 +114,24 @@ class Window(QWidget):
         if save_file_name != '':
             with open(save_file_name, "w+", encoding="utf-8") as f:
                 f.write(history_idiom_str)
+
+    def _timeout(self):
+        '''时间计时'''
+        if int(self.countdown.text()) <= 0:
+            # 计时结束, 关闭计时, 禁止玩家输入
+            self.timer.stop()
+            self.player_input.setReadOnly(True)
+            self.content_label.setText('%s你输了!!!\n' % (self.content_label.text()))
+            dlog = QDialog(self)
+            dlog.setWindowTitle('游戏结束')
+            dlog_label = QLabel(dlog)
+            dlog_label.resize(200, 50)
+            dlog_label.setText('你输了!!!')
+            dlog_label.setFont(QFont("Timers", 20))
+            dlog_label.setAlignment(Qt.AlignVCenter)
+            dlog.show()
+            return
+        self.countdown.setText(str(int(self.countdown.text()) - 1))
 
     def composer(self):
         '''电脑输入'''
@@ -166,10 +194,14 @@ class Window(QWidget):
         game_annotation.setWordWrap(True)
         # 倒计时
         self.countdown = QLabel(self)
-        self.countdown.move(450, 20)
+        self.countdown.move(480, 20)
         self.countdown.resize(80, 80)
-        # self.countdown.setText('%s' % (init.GAME_LIMITED_TIME))
+        self.countdown.setText('%s' % (init.GAME_LIMITED_TIME))
         self.countdown.setFont(QFont("Timers", 30))
+
+        self.timer = QTimer(self.countdown)
+        self.timer.timeout.connect(self._timeout)
+        self.timer.start(1000)
         # 重置按钮
         self.reset_btn = QPushButton(self)
         self.reset_btn.move(610, 10)
